@@ -1,0 +1,9 @@
+vim
+bash
+libblas-dev
+libboost-dev
+libarmadillo-dev
+python-ntplib
+libmodbus-dev
+git
+git-core

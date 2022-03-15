@@ -1,0 +1,17 @@
+version: '3.7'
+services:
+  ros-docker-container:
+    # build: . #This will build an image using the Dockerfile everytime you do a docker-compose up.
+    image: ros_melodic_dev_trial:latest #this will use the existing image to run the container.
+    container_name: ros-dev-container
+    restart: "no"
+    network_mode: "host"
+    privileged: true
+    command: bash -c "source ../devel/setup.bash" #this will source the catkin_ws we created using the Dockerfile. You can comment this if you want.
+    command: tail -f /dev/null # this will keep the container running until docker-compose down is called or ctrl+c is pressed on the terminal running the container.
+    environment: #the following enviroment variables are set to attach to your monitor to use GUI applications.
+      - DISPLAY=$DISPLAY
+      - QT_X11_NO_MITSHM=1
+      - XAUTHORITY=$XAUTH
+    volumes: 
+      - ~/dev_ws/src/path_generator:/home/catkin_ws/src:rw #this will attached the folder to your container. Format path_in_your_pc:path_in_container:rw -> rw means read-write permission
